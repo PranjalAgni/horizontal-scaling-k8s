@@ -1,0 +1,5 @@
+# Caddyfile
+funwithk8s.localhost {
+	tls self_signed
+	reverse_proxy auth:3000
+}

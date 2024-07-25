@@ -1,0 +1,26 @@
+version: '3.7'
+
+services:
+    caddy:
+        image: horizontalscaling/caddy
+        ports:
+            - 80:80
+            - 443:443
+            - 8080:8080
+        # Add reverse_proxy as attached network.
+        networks:
+            - reverse_proxy
+
+    auth:
+        image: horizontalscaling/auth
+        ports:
+            - "3000:3000"
+        environment:
+            - PORT=3000
+        networks:
+            - reverse_proxy
+
+networks:
+  # Add reverse_proxy as an external network.
+  reverse_proxy:
+    driver: "bridge"
