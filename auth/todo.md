@@ -1,7 +1,7 @@
 * Things to do
 
-[] Setup Postgres with Docker
-[] Create DB
-[] Install Drizzle ORM
-[] Define tables
+[x] Setup Postgres with Docker
+[x] Create DB
+[x] Install Drizzle ORM
+[x] Define tables
 [] 
