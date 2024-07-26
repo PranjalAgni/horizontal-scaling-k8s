@@ -1,5 +1,6 @@
 import { eq } from "drizzle-orm";
 import { FastifyReply, FastifyRequest } from "fastify";
+import jwt from "jsonwebtoken";
 import { db } from "../db";
 import { lower, users } from "../db/schema";
 import { IUserSignupDto } from "../schemas/User";
@@ -17,8 +18,8 @@ export const signup = async (
       .from(users)
       .where(eq(lower(users.email), email.toLowerCase()));
 
-    if (user) {
-      return reply.code(500).send("User already exists");
+    if (user.length > 0) {
+      return reply.code(409).send("User already exists");
     }
 
     const hashPass = await utils.genSalt(10, password);
@@ -26,11 +27,21 @@ export const signup = async (
       .insert(users)
       .values({
         email,
-        password: hashPass
+        password: String(hashPass)
       })
-      .returning({ id: users.id, email: users.email, h: users.password });
+      .returning({ id: users.id, email: users.email });
 
-    return reply.code(200).send(newUser);
+    const token = jwt.sign(
+      {
+        id: newUser[0].id,
+        email: newUser[0].email
+      },
+      process.env.APP_JWT_SECRET as string
+    );
+    return reply.code(200).send({
+      token: token,
+      ...newUser[0]
+    });
   } catch (err) {
     return handleServerError(reply, err);
   }

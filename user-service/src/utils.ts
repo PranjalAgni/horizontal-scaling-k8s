@@ -14,8 +14,6 @@ export const utils = {
       });
     });
   },
-
-  gen: async () => {},
   preValidation: (schema: Joi.ObjectSchema) => {
     return (
       request: FastifyRequest,
