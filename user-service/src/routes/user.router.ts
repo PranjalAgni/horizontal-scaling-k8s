@@ -1,9 +1,35 @@
 import { FastifyInstance } from "fastify";
 import { utils } from "../utils";
-import { IUserSignupDto, signupSchema } from "../schemas/User";
+import {
+  IUserLoginDto,
+  IUserSignupDto,
+  loginSchema,
+  signupSchema
+} from "../schemas/User";
 import * as controllers from "../controllers";
 
 async function userRouter(fastify: FastifyInstance) {
+  fastify.post<{ Body: IUserLoginDto }>(
+    "/login",
+    {
+      schema: {
+        body: {
+          type: "object",
+          required: ["email", "password"],
+          properties: {
+            email: { type: "string", format: "email" },
+            password: { type: "string", minLength: 8 }
+          }
+        }
+      },
+      config: {
+        description: "User login endpoint"
+      },
+      preValidation: utils.preValidation(loginSchema)
+    },
+    controllers.login
+  );
+
   fastify.post<{ Body: IUserSignupDto }>(
     "/signup",
     {

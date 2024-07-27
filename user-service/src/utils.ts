@@ -14,6 +14,14 @@ export const utils = {
       });
     });
   },
+  compareHash: (password: string, hash: string): Promise<boolean> => {
+    return new Promise((resolve, reject) => {
+      bcrypt.compare(password, hash, (err, res) => {
+        if (err) return reject(err);
+        return resolve(res);
+      });
+    });
+  },
   preValidation: (schema: Joi.ObjectSchema) => {
     return (
       request: FastifyRequest,
