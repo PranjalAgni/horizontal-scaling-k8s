@@ -31,7 +31,10 @@ export const login = async (
         id: existingUser[0].id,
         email: existingUser[0].email
       },
-      process.env.APP_JWT_SECRET as string
+      process.env.APP_JWT_SECRET as string,
+      {
+        expiresIn: "5m"
+      }
     );
 
     reply.code(200).send({
