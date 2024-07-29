@@ -1,4 +1,5 @@
 import { FastifyReply, FastifyRequest } from "fastify";
+import jwt from "jsonwebtoken";
 import Joi from "joi";
 import bcrypt from "bcryptjs";
 
@@ -12,6 +13,11 @@ export const utils = {
           return resolve(hash);
         });
       });
+    });
+  },
+  generateToken: (payload: object, expirationTime: string | number) => {
+    return jwt.sign(payload, process.env.APP_JWT_SECRET as string, {
+      expiresIn: expirationTime
     });
   },
   compareHash: (password: string, hash: string): Promise<boolean> => {

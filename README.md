@@ -16,4 +16,5 @@ Explored since starting this:
 * 10- Bun 🌭
 * 11- k8s 🫙
 * 12- docker & docker compose 🐳
+* 13- k6 for load testing ✱
 

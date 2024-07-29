@@ -26,15 +26,12 @@ export const login = async (
     if (!isValid) {
       return reply.code(500).send("Wrong credentials");
     }
-    const token = jwt.sign(
+    const token = utils.generateToken(
       {
         id: existingUser[0].id,
         email: existingUser[0].email
       },
-      process.env.APP_JWT_SECRET as string,
-      {
-        expiresIn: "5m"
-      }
+      "5m"
     );
 
     reply.code(200).send({
@@ -69,13 +66,14 @@ export const signup = async (
       })
       .returning({ id: users.id, email: users.email });
 
-    const token = jwt.sign(
+    const token = utils.generateToken(
       {
         id: newUser[0].id,
         email: newUser[0].email
       },
-      process.env.APP_JWT_SECRET as string
+      "5m"
     );
+
     return reply.code(200).send({
       token: token,
       ...newUser[0]
