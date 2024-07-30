@@ -1,3 +1,4 @@
+require("dotenv").config();
 import { createServer } from "./app";
 import { initDB } from "./db";
 

@@ -39,7 +39,7 @@ export const createServer = async () => {
   fastify.get("/", (request, reply) => {
     reply
       .status(200)
-      .send({ message: "Hello from HORIZONTAL-SCALING with k8s" });
+      .send({ message: "Hello from (FASTIFY) HORIZONTAL-SCALING with k8s" });
   });
 
   // Graceful shutdown
