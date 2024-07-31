@@ -1,7 +1,6 @@
 import { eq } from "drizzle-orm";
-import fastify, { FastifyReply, FastifyRequest } from "fastify";
-import jwt from "jsonwebtoken";
-import { db } from "../db";
+import { FastifyReply, FastifyRequest } from "fastify";
+import { pooledClient, db } from "../db";
 import { lower, users } from "../db/schema";
 import { IUserLoginDto, IUserSignupDto } from "../schemas/User";
 import { utils } from "../utils";
@@ -77,6 +76,46 @@ export const signup = async (
     return reply.code(200).send({
       token: token,
       ...newUser[0]
+    });
+  } catch (err) {
+    return handleServerError(reply, err);
+  }
+};
+
+export const signup2 = async (
+  request: FastifyRequest<{ Body: IUserSignupDto }>,
+  reply: FastifyReply
+) => {
+  try {
+    const { email, password, firstName, lastName } = request.body;
+
+    const user = await pooledClient.query(
+      "SELECT EXISTS (SELECT 1 FROM users WHERE email = $1 LIMIT 1)",
+      [email]
+    );
+
+    const isExists = user.rows[0].exists;
+    if (isExists) {
+      return reply.code(409).send("User already exists");
+    }
+
+    const hashPass = await utils.genSalt(10, password);
+    const result = await pooledClient.query(
+      "INSERT INTO users(email, password, created_at, updated_at) VALUES ($1, $2, $3, $4) RETURNING id, email, created_at",
+      [email, hashPass, new Date().toISOString(), new Date().toISOString()]
+    );
+    const newUser = result.rows[0];
+    const token = utils.generateToken(
+      {
+        id: newUser[0],
+        email: newUser[1]
+      },
+      "5m"
+    );
+
+    return reply.code(200).send({
+      token: token,
+      ...newUser
     });
   } catch (err) {
     return handleServerError(reply, err);

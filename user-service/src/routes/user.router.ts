@@ -52,6 +52,29 @@ async function userRouter(fastify: FastifyInstance) {
     },
     controllers.signup
   );
+
+  fastify.post<{ Body: IUserSignupDto }>(
+    "/signup2",
+    {
+      schema: {
+        body: {
+          type: "object",
+          required: ["email", "password"],
+          properties: {
+            email: { type: "string", format: "email" },
+            password: { type: "string", minLength: 8 },
+            firstName: { type: "string" },
+            lastName: { type: "string" }
+          }
+        }
+      },
+      config: {
+        description: "User signup endpoint"
+      },
+      preValidation: utils.preValidation(signupSchema)
+    },
+    controllers.signup2
+  );
 }
 
 export default userRouter;
