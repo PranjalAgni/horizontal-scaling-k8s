@@ -23,7 +23,7 @@ function randomString(length, charset = '') {
   return res;
 }
 
-const BASE_URL = 'http://localhost:5001';
+const BASE_URL = 'http://localhost:31727';
 
 export default function () {
   const EMAIL = `${randomString(10)}@example.com`;

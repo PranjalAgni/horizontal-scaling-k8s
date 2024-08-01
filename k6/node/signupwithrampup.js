@@ -30,7 +30,7 @@ export default function () {
   const PASSWORD = 'superCroc2019';
 
   const res = http.post(
-    `${BASE_URL}/user/signup`,
+    `${BASE_URL}/user/signup2`,
     JSON.stringify({
       firstName: 'Crocodile',
       lastName: 'Owner',

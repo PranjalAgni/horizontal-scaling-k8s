@@ -17,4 +17,7 @@ Explored since starting this:
 * 11- k8s 🫙
 * 12- docker & docker compose 🐳
 * 13- k6 for load testing ✱
+* 14- Golang 🦄
+* 15- Fiber
+* 16- Load testing stratigies
 
