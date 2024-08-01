@@ -5,8 +5,8 @@ import (
 	"errors"
 	"fmt"
 	"log"
-	"user-service-fast/user-service-fast/models"
-	"user-service-fast/user-service-fast/pkg/utils"
+	"user-service-fast/models"
+	"user-service-fast/pkg/utils"
 
 	_ "github.com/lib/pq"
 )

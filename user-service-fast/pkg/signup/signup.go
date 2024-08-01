@@ -4,9 +4,9 @@ import (
 	"database/sql"
 	"log"
 	"strings"
-	"user-service-fast/user-service-fast/datastore"
-	"user-service-fast/user-service-fast/models"
-	"user-service-fast/user-service-fast/pkg/utils"
+	"user-service-fast/datastore"
+	"user-service-fast/models"
+	"user-service-fast/pkg/utils"
 
 	"github.com/gofiber/fiber/v2"
 )

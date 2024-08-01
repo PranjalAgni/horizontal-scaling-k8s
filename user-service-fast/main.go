@@ -1,8 +1,8 @@
 package main
 
 import (
-	"user-service-fast/user-service-fast/api"
-	"user-service-fast/user-service-fast/pkg/utils"
+	"user-service-fast/api"
+	"user-service-fast/pkg/utils"
 )
 
 func main() {

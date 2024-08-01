@@ -1,8 +1,8 @@
 package api
 
 import (
-	"user-service-fast/user-service-fast/datastore"
-	"user-service-fast/user-service-fast/pkg/signup"
+	"user-service-fast/datastore"
+	"user-service-fast/pkg/signup"
 
 	"github.com/gofiber/fiber/v2"
 	"github.com/gofiber/fiber/v2/middleware/cors"
