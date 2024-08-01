@@ -4,4 +4,4 @@ WORKDIR /src/app
 COPY . .
 RUN go mod download
 RUN go build -o user-service-fast main.go
-CMD ["./bin/user-service-fast"]
+CMD ["./user-service-fast"]
