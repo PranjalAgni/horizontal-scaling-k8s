@@ -1,0 +1,18 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: usf-depl
+spec:
+  replicas: 8
+  selector:
+    matchLabels:
+      app: usf
+  template:
+    metadata:
+      labels:
+        app: usf
+    spec:
+      containers:
+        - name: user-service-fast
+          image: horizontalscaling/user-service-fast
+          imagePullPolicy: Never
