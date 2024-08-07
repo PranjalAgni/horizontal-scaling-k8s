@@ -33,8 +33,17 @@ export const login = async (
       "5m"
     );
 
+    const refreshToken = utils.generateToken(
+      {
+        id: existingUser[0].id,
+        email: existingUser[0].email
+      },
+      "15m"
+    );
+
     reply.code(200).send({
       token,
+      refreshToken,
       id: existingUser[0].id
     });
   } catch (err) {
