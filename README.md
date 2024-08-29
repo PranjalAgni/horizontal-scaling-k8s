@@ -1,6 +1,6 @@
 # Tale about k8s learning
 
-I started this to learn about Kubernetes, from there this repo is just grown into a heavy backend class, wrote 2 backend services just to explore different concepts and rolling out my own auth after so long and had to try all the mordern tech came in past few months (lol just fomo issues)
+I started this to learn about Kubernetes, from there this repo is just grown into a backend-heavy explorations/study playground, wrote 2 backend services just to explore different concepts and rolling out my own auth after so long and had to try all the mordern tech came in past few months (lol just fomo issues)
 
 Explored since starting this:
 
@@ -20,4 +20,5 @@ Explored since starting this:
 * 14- Golang 🦄
 * 15- Fiber
 * 16- Load testing stratigies
+* 17- REST API with native SQL in Go
 
